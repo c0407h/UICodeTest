@@ -10,16 +10,33 @@ import UIKit
 class ViewController: UIViewController {
     //Code UI Test
     
-    let emailTextFieldView = UIView()
+//    let emailTextFieldView = UIView()
+    
+    
+    //클로저 실행문 방식
+    //lazy var emailTextFieldView: UIView = {
+    let emailTextFieldView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .blue
+        view.layer.cornerRadius = 20
+        view.layer.masksToBounds = true
+        
+        // let이 아닌 lazy var로 선언해야 에러가 안남
+        // 메모리에 emailTextFieldView가 나중에 생기기 때문
+        // ViewController가 생성될때 view가 먼저 생성이 되어야 addSubview를 할 수 있기 때문에
+//        view.addSubview(emailTextFieldView)
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         makeUI()
+        
     }
     
     
     func makeUI() {
-        emailTextFieldView.backgroundColor = .gray
+//        emailTextFieldView.backgroundColor = .gray
         
         view.addSubview(emailTextFieldView)
         
@@ -35,8 +52,8 @@ class ViewController: UIViewController {
         //height, width는 기준이 없기 때문에 constraint(equalToConstant:) 사용
         emailTextFieldView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        emailTextFieldView.layer.cornerRadius = 20
-        emailTextFieldView.layer.masksToBounds = true
+//        emailTextFieldView.layer.cornerRadius = 20
+//        emailTextFieldView.layer.masksToBounds = true
     }
 
 
